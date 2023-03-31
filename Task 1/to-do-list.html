@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("download.jpg");
+            background-size: 1365px 800px;
+            background-position: fixed;
+            
+        }
+
+        h1 {
+            text-align: center;
+            
+        }
+
+        h1, ul{
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 10px;
+            color: white;
+        }
+
+        li {
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            margin-left: 100px;
+            justify-content: center;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        #add-task {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        #add-task input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 80%;
+            
+        }
+
+        #add-task button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete {
+            display: flex;
+            margin-left: 88.2%;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: -30px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>To-Do List</h1>
+    <ul id="todo-list">
+        <div id="add-task">
+            <input type="text" placeholder="Add a new task" />
+            <button id="add-btn">Add</button>
+        </div>
+        <br />
+        <li>
+            <input type="checkbox" />
+            <span>Buy groceries</span>
+            <button class="delete">Delete</button>
+        </li>
+    </ul>
+    <script>
+        const todoList = document.getElementById("todo-list");
+        const addBtn = document.getElementById("add-btn");
+
+        function addTask() {
+            const input = document.querySelector("#add-task input[type='text']");
+            if (input.value.trim() === "") {
+                return;
+            }
+            const li = document.createElement("li");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            const span = document.createElement("span");
+            span.innerText = input.value;
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Delete";
+            deleteBtn.className = "delete";
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+            todoList.appendChild(li);
+            input.value = "";
+        }
+
+        function deleteTask(e) {
+            const item = e.target.parentNode;
+            if (e.target.className === "delete") {
+                todoList.removeChild(item);
+            }
+        }
+
+        addBtn.addEventListener("click", addTask);
+        todoList.addEventListener("click", deleteTask);
+    </script>
+</body>
+
+</html>
